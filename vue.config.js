@@ -1,10 +1,19 @@
 const path = require('path')
+// const data = require('./src/mock/data')
 module.exports = {
     devServer: {
         host: 'localhost',
         hot: true,
         open: true,
         port: 8000, 
+        before: function (app) {
+            app.get('/test', function (req, res) {
+                res.json({
+                    status: 0,
+                    data:'empty'
+                });
+            });
+        },
     },
     configureWebpack: {
         resolve: {

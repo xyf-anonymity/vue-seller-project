@@ -11,6 +11,10 @@ export default {
   name: 'App',
     components:{
       'v-a':a
+    },
+    async mounted(){
+      const result = await this.$axios.get('/api/data')
+      console.log(result)
     }
 }
 </script>
