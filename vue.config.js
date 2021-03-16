@@ -1,6 +1,7 @@
 const path = require('path')
 // const data = require('./src/mock/data')
 module.exports = {
+    lintOnSave:'warning',
     devServer: {
         host: 'localhost',
         hot: true,
@@ -23,6 +24,6 @@ module.exports = {
                 store: path.resolve(__dirname, 'src/store'),
                 components:path.resolve(__dirname,'src/components')
             },  
-       }
+        },
     }
 }

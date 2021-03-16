@@ -1,7 +1,9 @@
-import test1 from 'pages/test1'
-import test2 from 'pages/test2'
+import goods from 'pages/goods'
+import evaluation from 'pages/evaluation'
+import seller from 'pages/seller'
 export default [
-    {path:'/test1',component:test1},
-    {path:'/test2',component:test2},
-    {path:'',redirect:'/test1'},
+    {path:'/goods',component:goods},
+    {path:'/evaluation',component:evaluation},
+    {path:'/seller',component:seller},
+    {path:'',redirect:'/goods'},
 ]
