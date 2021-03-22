@@ -1,16 +1,18 @@
 <template>
     <div class="discount">
-        <div><v-icon decrease_2="decrease_2"></v-icon><span>在线支付满28减5，满50减10</span></div>
-        <div><v-icon discount_2="discount_2"></v-icon><span>单人精彩赛</span></div>
-        <div><v-icon discount_2="discount_2"></v-icon><span>清肺雪梨汤 8 折抢购</span></div>
-        <div><v-icon special_2="special_2"></v-icon><span>特价饮品 8 折抢购</span></div>
-        <div class="last"><v-icon special_2="special_2"></v-icon><span>单人特色套餐</span></div>
+        <div v-for="(item,index) in seller.supports" :key="index">
+            <v-icon imgSize="2" :type="item.type"></v-icon><span>{{item.content}}</span>
+        </div>
     </div>
 </template>
 
 <script>
+    import {mapState} from 'vuex'
     export default {
         name:'v-discount',
+        computed:{
+            ...mapState(['seller']),
+        }
     }
 </script>
 

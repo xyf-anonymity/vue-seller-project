@@ -1,12 +1,12 @@
 module.exports = {
   "seller": {
-    "name": "嘉禾一品（温都水城）",
-    "description": "硅谷专送",
-    "deliveryTime": 28,
-    "score|1-5.2": 4,
-    "serviceScore": 4.1,
-    "foodScore": 4.3,
-    "rankRate": 69.2,
+    "name": "隆江猪脚饭（汕头店）",
+    "description": "饿了么专送",
+    "deliveryTime": 20,
+    "score|0-4.1": 5,
+    "serviceScore|0-4.1": 4.1,
+    "foodScore|0-4.1": 4.3,
+    "rankRate|0-99.1": 69.2,
     "minPrice": 20,
     "deliveryPrice": 4,
     "ratingCount": 24,
@@ -15,42 +15,42 @@ module.exports = {
     "bulletin": "是以粥为特色的中式营养快餐，自2004年10月18日创立“嘉和一品”品牌至今，不断优化管理，积极创新，立足于“贴近百姓生活，服务千家万户”",
     "supports": [
       {
-        "type": 0,
+        "type|0-4": 0,
         "name": "首单",
         "content": "新用户下单立减17元(不与其它活动同享)"
       },
       {
-        "type": 1,
+        "type|0-4": 1,
         "name": "满减",
         "content": "满35减19，满65减35"
       },
       {
-        "type": 2,
+        "type|0-4": 2,
         "name": "特价",
         "content": "【立减19.5元】欢乐小食餐"
       },
       {
-        "type": 2,
+        "type|0-4": 2,
         "name": "特价",
         "content": "【立减29元】火烤菠萝皇堡双人餐"
       },
       {
-        "type": 2,
+        "type|0-4": 2,
         "name": "特价",
         "content": "【立减16.5元】火烤菠萝皇堡单人餐"
       },
       {
-        "type": 2,
+        "type|0-4": 2,
         "name": "特价",
         "content": "【立减15】经典安格斯单人餐"
       },
       {
-        "type": 2,
+        "type|0-4": 2,
         "name": "特价",
         "content": "【立减11.95】皇堡双人餐"
       },
       {
-        "type": 2,
+        "type|0-4": 2,
         "name": "特价",
         "content": "【立减19.8】半价单人餐"
       }
@@ -78,7 +78,7 @@ module.exports = {
         {
           "name": "南瓜粥",
           "price": 9,
-          "oldPrice": "",
+          "oldPrice": 12,
           "description": "甜粥",
           "sellCount": 91,
           "rating": 100,
@@ -117,7 +117,7 @@ module.exports = {
         {
           "name": "红豆薏米美肤粥",
           "price": 12,
-          "oldPrice": "",
+          "oldPrice": 16,
           "description": "甜粥",
           "sellCount": 86,
           "rating": 100,

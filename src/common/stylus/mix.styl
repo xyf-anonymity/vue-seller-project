@@ -1,3 +1,10 @@
+// 指定最后一个元素的边框线条的高度
+border-none($height)
+    &:last-child
+        &:after
+            height $height
+
+//产生 手机 1 像素的线条的混合
 border-mix($color)
     position relative
     &:after
@@ -13,6 +20,7 @@ border-mix($color)
         @media screen and (-webkit-device-pixel-ratio 3)
             transform scaleY(0.3333)
 
+//用于使图片匹配手机与 css 像素与比的混合
 background-img-mix($name)
         @media screen and (-webkit-device-pixel-ratio 2)
             background-image url('./img/'+$name+'@2x.png')

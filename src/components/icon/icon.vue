@@ -1,6 +1,6 @@
 <template>
     <div>
-        <i class="icon" :class="[decrease_1,decrease_2,discount,discount_2,special_2]"></i>
+        <i class="icon" :class="[imgNames]"></i>
     </div>
 </template>
 
@@ -8,12 +8,21 @@
     export default {
         name:'v-icon',
         props:{
-            decrease_1:String,
-            decrease_2:String,
-            discount_2:String,
-            special_2:String,
-            discount:String
-        }
+            imgSize:String,
+            type:[Number,String]
+        },
+        data(){
+            return {
+                imgTypes:['decrease','discount','special','guarantee','invoice']
+            }
+        },
+        computed:{
+            imgNames(){
+                return this.imgTypes[this.type] + '_' + this.imgSize
+            }
+        },
+
+        
     }
 </script>
 

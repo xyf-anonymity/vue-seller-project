@@ -6,7 +6,7 @@ import mutations from 'store/mutations'
 import getters from 'store/getters'
 vue.use(Vuex)
 export default new Vuex.Store({
-    strict:true,
+    // strict:true,
     state,
     mutations,
     actions,
