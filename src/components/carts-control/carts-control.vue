@@ -5,19 +5,21 @@
                 </i>
             </transition>
             <div class="purchase_number" v-show="food.count">{{food.count}}</div>
-            <i class="layout-add_circle add" @click="add(food)"></i>
+            <i class="layout-add_circle add" @click="add(food,$event)"></i>
     </div>
 </template>
 
 <script>
+    import PubSub from 'pubsub-js'
     export default {
         name:'carts-control',
         props:{
             food:Object
         },
         methods:{
-            add(food){
+            add(food,event){
                 this.$bus.$emit('add',food)
+                PubSub.publish('showBall',event)
             },
             remove(food){
                 this.$bus.$emit('remove',food)

@@ -18,6 +18,17 @@
             <div class="right active">
                 <span>{{payText}}</span>
             </div>
+            <div class="balls">
+                <div class="ballWarp" v-for="(ball,index) in balls" :key="index">
+                    <transition
+                        v-on:before-enter="beforeDrop"
+                        v-on:enter="Droping"
+                        v-on:after-enter="afterDrop"
+                    >
+                        <i class="layout-add_circle ball" v-show="ball.show"></i>
+                    </transition>
+                </div>
+            </div>
         </div>
         <div class="list" v-show="isShow">
             <div class="header">
@@ -46,6 +57,8 @@
 <script>
     import {mapState} from 'vuex'
     import BetterScroll from 'better-scroll'
+    import PubSub from 'pubsub-js'
+    import {transform} from '@/utile/utile.js'
     import cartsControl from 'components/carts-control/carts-control.vue'
     export default {
         name:'v-carts',
@@ -54,7 +67,15 @@
         },
         data(){
             return {
-                isShow:false
+                isShow:false,
+                balls:[
+                    {show:false},
+                    {show:false},
+                    {show:false},
+                    {show:false},
+                    {show:false},
+                ],
+                dropBall:[]
             }
         },
         computed:{
@@ -91,6 +112,7 @@
             listIsShow(){
                 if(this.totalCount <= 0) return 
                 this.isShow = !this.isShow
+                this.scroll() //点击显示购物车商品列表后 绑定屏幕滚动
             },
             //点击清空购物车
             clear(){
@@ -100,9 +122,56 @@
             scroll(){
                 this.$nextTick(()=>{
                     //进入此判断说明 cartsFoods 中 必定有数据回来 此时操作 dom 是安全的
-                    this.contentScroll = new BetterScroll(this.$refs.content,{click:true})
-                    this.contentScroll.refresh()
+                   if(!this.contentScroll) this.contentScroll = new BetterScroll(this.$refs.content,{click:true})
+                   else this.contentScroll.refresh()
+                })    
+            },
+            showBall(name,event){  //点击添加购物车触发小球显示并完成动画
+                // 找到第一个为 false 的小球并把它变为 true
+                for(let i = 0;i<this.balls.length;i++){
+                    let ball = this.balls[i]
+                    if(!ball.show) {
+                        ball.show = true
+                        ball.target = event.target
+                        this.dropBall.push(ball)
+                        return
+                    }
+                }
+            },
+            beforeDrop(el){ //小球显示并设置动画开始的位置
+                //找到 balls 中最后一个为 true 的小球，即是第一个为 false 的小球
+                let ballsCount = this.balls.length
+                while(0 < ballsCount) {
+                    ballsCount--
+                    let ball = this.balls[ballsCount]
+                    if(ball.show) {
+                        let viewHeight = document.documentElement.clientHeight //整个视口的高度
+                        let Y = viewHeight - ball.target.getBoundingClientRect().bottom - 10 - 12 - 7
+                        let X = ball.target.getBoundingClientRect().left + 10 - 10 - 24 
+                        transform(el,'translateX',X)
+                        transform(el,'translateY',-Y)
+                        transform(el,'scaleX',1)
+                        transform(el,'scaleY',1)
+                        return
+                    }
+                }
+            },
+            Droping(el){ //小球进行动画时的过程
+                let hook = el.style.offsetHeight //当访问元素的位置信息时，js为了获取元素的精确信息，会等界面渲染完成后再执行
+                this.$nextTick(()=>{
+                    transform(el,'translateX',0)
+                    transform(el,'translateY',0)
+                    transform(el,'scaleX',2.2)
+                    transform(el,'scaleY',2.2)
                 })
+                this.hook = hook //随便使用 hook
+            },
+            afterDrop(el){ //设置小球动画结束后的位置并隐藏
+                for(let i=0;i<this.dropBall.length;i++) {
+                    let ball = this.dropBall.shift()
+                    if(ball.show) ball.show = false
+                    el.style.display = 'none' //手动置为 none 让渲染变得更快
+                }
             }
         },
         watch:{
@@ -111,7 +180,7 @@
             },
         },
         mounted(){
-            this.scroll()
+            PubSub.subscribe('showBall',this.showBall)
         },
         components:{
             'carts-control':cartsControl
@@ -209,6 +278,21 @@
                     color white
             span
                 color rgba(255,255,255,0.6)
+        .balls
+            .ballWarp
+                .ball   
+                    position absolute
+                    bottom 24px
+                    left 30px
+                    width 20px
+                    height 20px
+                    // background-color rgba(0,160,220,1)
+                    border-radius 50%
+                    transition .5s all  !important
+                    &.layout-add_circle
+                        text-align center
+                        font-size 20px
+                        color rgba(0,160,220,1) 
     .list
         max-height 255px
         position fixed

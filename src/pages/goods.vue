@@ -166,17 +166,22 @@
                 height 100%
                 background-color #f3f5f7
                 .goods-navs
+                    overflow hidden
                     display flex
                     flex-direction column
                     justify-content center
                     align-items center
                     .goods-navs-item
                         display inline-flex
+                        justify-content center
                         align-items center
-                        width 56px
+                        // width 56px
+                        width 100%
                         height 54px
                         border-mix(rgba(7,17,27,0.1))
                         border-none(0px)
+                        &:after
+                            width 70%
                         &.active
                             background-color white
                         .icon
@@ -185,6 +190,7 @@
                             font-size 12px
                             color rgba(24,20,20,1)
                             font-weight 200
+                            
             .right
                 flex 1
                 flex-shrink 0
