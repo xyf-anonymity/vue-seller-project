@@ -57,11 +57,12 @@
             ...mapState(['goods']),
             //计算高亮
             currentActive(){
+                let index = 0
                 let oldIndex
                 //根据滑动的高度计算出处于哪个分类位置下，找出heightArray数组中对应的index
                 //把左侧导航的节点装在一个数组里，再用index找出需要滚动到的节点
-                let index = this.heightArray.findIndex((item,index,arr)=>{
-                   return (this.scrollHeight >= 0 && this.scrollHeight < arr[index+1])
+                index = this.heightArray.findIndex((item,index,arr)=>{
+                   return (this.scrollHeight >= item && this.scrollHeight < arr[index+1])
                 })
                 if(index !== oldIndex) {
                     oldIndex = index
@@ -133,12 +134,11 @@
 
         },
         async mounted(){
+            await this[GETGOODS](GETGOODS)
+            this.initialScroll() 
+            this.initialHeightArray() 
             this.$bus.$on('add',this.add)
             this.$bus.$on('remove',this.remove)
-            await this[GETGOODS](GETGOODS)
-            this.initialHeightArray() 
-            this.initialScroll() 
-           
         },
         components:{
             'v-food':food,

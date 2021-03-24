@@ -157,22 +157,22 @@
                 }
             },
             Droping(el){ //小球进行动画时的过程
-                let hook = el.style.offsetHeight //当访问元素的位置信息时，js为了获取元素的精确信息，会等界面渲染完成后再执行
+                let hook = el.offsetHeight //当访问元素的位置信息时，js为了获取元素的精确信息，会等界面渲染完成后再执行
                 this.$nextTick(()=>{
                     transform(el,'translateX',0)
                     transform(el,'translateY',0)
-                    transform(el,'scaleX',2.2)
-                    transform(el,'scaleY',2.2)
+                    transform(el,'scaleX',2)
+                    transform(el,'scaleY',2)
                 })
                 this.hook = hook //随便使用 hook
             },
             afterDrop(el){ //设置小球动画结束后的位置并隐藏
-                for(let i=0;i<this.dropBall.length;i++) {
-                    let ball = this.dropBall.shift()
-                    if(ball.show) ball.show = false
+                let ball = this.dropBall.shift()
+                if(ball.show) {
+                    ball.show = false
                     el.style.display = 'none' //手动置为 none 让渲染变得更快
                 }
-            }
+        }
         },
         watch:{
             totalCount(){ //监听购物车中的商品数量 为 0 并且购物车列表已经打开的情况下，把它们隐藏
@@ -237,6 +237,7 @@
                     top 5px
                     width 24px
                     height 16px
+                    z-index 9
                     line-height 16px
                     border-radius 6px
                     background red
