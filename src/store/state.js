@@ -2,5 +2,5 @@ export default {
     seller: {},
     goods: [],
     ratings: [],
-    OK : 0
+    OK : 200
 }

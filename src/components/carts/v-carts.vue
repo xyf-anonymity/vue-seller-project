@@ -30,27 +30,31 @@
                 </div>
             </div>
         </div>
-        <div class="list" v-show="isShow">
-            <div class="header">
-                <span class="cartText">购物车</span>
-                <span class="clear" @click="clear">清空</span>
+        <transition name="list">
+            <div class="list" v-show="isShow">
+                <div class="header">
+                    <span class="cartText">购物车</span>
+                    <span class="clear" @click="clear">清空</span>
+                </div>
+                <div class="content" ref="content">
+                    <ul>
+                        <li class="item" v-for="(food,index) in cartsFoods" :key="index">
+                            <span class="left"> {{food.name}}</span>
+                            <div class="right">
+                                <span class="price_wrap">
+                                    <span style="font-size:10px;color:red;text-align:center">￥</span>
+                                    <span class="price">{{food.price}}</span>
+                                </span>  
+                                <carts-control class="contorl" :food="food"></carts-control>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="content" ref="content">
-                <ul>
-                    <li class="item" v-for="(food,index) in cartsFoods" :key="index">
-                        <span class="left"> {{food.name}}</span>
-                        <div class="right">
-                            <span class="price_wrap">
-                                <span style="font-size:10px;color:red;text-align:center">￥</span>
-                                <span class="price">{{food.price}}</span>
-                            </span>  
-                            <carts-control class="contorl" :food="food"></carts-control>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="mask" v-show="isShow" @click="maskIsShow"></div>
+        </transition>
+        <transition name="mask">
+            <div class="mask" v-show="isShow" @click="maskIsShow"></div>
+        </transition>
     </div> 
 </template>
 
@@ -94,13 +98,14 @@
             },
             //计算是否达到起送价
             payText(){
-                if(this.totalPrice < this.seller.minPrice && this.totalPrice !== 0)  
+                if(this.totalPrice < this.seller.minPrice && this.totalPrice !== 0){
                     return `还差￥${this.seller.minPrice - this.totalPrice}起送` 
-                else if(this.totalPrice >= this.seller.minPrice) 
+                } else if(this.totalPrice >= this.seller.minPrice) {
                     return `去结算`
-                else if(this.totalPrice === 0) 
+                } else if(this.totalPrice === 0) {
+                    if(this.seller.minPrice === undefined) return "" 
                     return `￥${this.seller.minPrice}起送`
-                else return ''
+                }  else return ''                    
             }
         },
         methods:{
@@ -303,6 +308,7 @@
         width 100%
         background #f3f5f1
         padding-bottom 20px
+        transform translate3d(0,0,0)
         .header
             border-mix(rgba(7,17,27,.1))
             height 40px

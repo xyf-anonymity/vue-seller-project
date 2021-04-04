@@ -12,9 +12,16 @@ module.exports = {
                 res.json({
                     status: 0,
                     data:'empty'
-                });
-            });
+                })
+            })
         },
+        proxy: {
+            '/8000': {
+                target: 'http://localhost:8000',
+                changeOrigin: true,
+                pathRewrite: { '^/8000': '' },
+            }
+        }
     },
     configureWebpack: {
         resolve: {

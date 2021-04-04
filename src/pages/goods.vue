@@ -127,7 +127,7 @@
             clear(){
                 this.goods.forEach((goodItem)=>{
                     goodItem.foods.forEach((food)=>{
-                        food.count = 0
+                        if(food.count && food.count > 0) food.count = 0
                     })
                 })
             }

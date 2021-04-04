@@ -1,6 +1,6 @@
 import {GETSELLER,GETGOODS,GETRATINGS} from 'store/mutations_type.js'
 export default {
-    [GETSELLER](state,seller) {
+    [GETSELLER](state, seller) {
         state.seller = seller
     },
     [GETGOODS](state,goods) {
