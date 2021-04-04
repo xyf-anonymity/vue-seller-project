@@ -28,6 +28,7 @@ border-mix($color)
 
 //用于使图片匹配手机与 css 像素与比的混合
 background-img-mix($name)
+        // background-image url('./img/'+$name+'@3x.png')
         @media screen and (-webkit-device-pixel-ratio 2)
             background-image url('./img/'+$name+'@2x.png')
         @media screen and (-webkit-device-pixel-ratio 3)
