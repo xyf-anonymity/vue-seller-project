@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var n = 2;//4
+        var obj = {
+            n: 3,
+            fn: (function (n) {
+                console.log('----')
+                n *= 2    //4
+                this.n += 2  // 4
+                console.log(this)
+                var n = 5
+                console.log(n)
+                console.log("window.n:", window.n)  //4
+                return function (m) {
+                    console.log("n:", n, "m", m) //n:5 //m:3 
+                    console.log(this)
+                    this.n *= 2   //8     //6
+                    console.log(m + (++n))  //3+6=9   | 3 + 7 = 10
+                }
+            })(n)
+        }
+        // var fn = obj.fn
+        // fn(3)
+        // obj.fn
+        // console.log(n, obj.n)  // n:8 , obj.n:6
+        // fn = null
+    </script>
+</body>
+
+</html>
