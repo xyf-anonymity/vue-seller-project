@@ -36,6 +36,9 @@
     },
     async mounted(){
       await this[GETSELLER](GETSELLER)
+/*       let data1 = await this.$http.user.getUserAll({page:2,num:2})
+      let data2 = await this.$http.user.login({name:"xyf",password:"yf135463"})
+      console.log(data1,data2) */
     }
   }
 </script>

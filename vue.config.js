@@ -16,10 +16,10 @@ module.exports = {
             })
         },
         proxy: {
-            '/8000': {
-                target: 'http://localhost:8000',
+            '/api': {
+                target: 'http://localhost:8080',
                 changeOrigin: true,
-                pathRewrite: { '^/8000': '' },
+                pathRewrite: { '^/api': '' },
             }
         }
     },

@@ -62,7 +62,7 @@
     import {mapState} from 'vuex'
     import BetterScroll from 'better-scroll'
     import PubSub from 'pubsub-js'
-    import {transform} from '@/utile/utile.js'
+    import {transform} from '@/utile/transform.js'
     import cartsControl from 'components/carts-control/carts-control.vue'
     export default {
         name:'v-carts',

@@ -1,16 +1,16 @@
 import { GETSELLER, GETGOODS, GETRATINGS } from 'store/mutations_type.js'
-import axios from '@/http'
+import http from '@/http'
 export default {
     async [GETSELLER]({ commit, state }) {
-        const { status, data } = await axios.get('api/getSeller')
+        const { status, data } = await http.seller.getSeller()
         if(status === state.OK) commit(GETSELLER,data)
     },
     async [GETGOODS]({ commit, state }) {
-        const { status, data } = await axios.get('api/getGoods')
+        const { status, data } = await http.seller.getGoods()
         if(status === state.OK) commit(GETGOODS,data)
     },
     async [GETRATINGS]({ commit, state }) {
-        const { status, data } = await axios.get('api/getRatings')
+        const { status, data } = await http.seller.getRatings()
         if(status === state.OK) commit(GETRATINGS,data)
     }
 }
