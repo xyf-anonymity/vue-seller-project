@@ -62,7 +62,7 @@
     import {mapState} from 'vuex'
     import BetterScroll from 'better-scroll'
     import PubSub from 'pubsub-js'
-    import {transform} from '@/utile/utile.js'
+    import {transform} from '@/utile/transform.js'
     import cartsControl from 'components/carts-control/carts-control.vue'
     export default {
         name:'v-carts',
@@ -102,8 +102,9 @@
                     return `还差￥${this.seller.minPrice - this.totalPrice}起送` 
                 else if(this.totalPrice >= this.seller.minPrice) 
                     return `去结算`
-                else if(this.totalPrice === 0) 
-                    return `￥${this.seller.minPrice}起送`
+                else if(this.totalPrice === 0)
+                    if(this.seller.minPrice === undefined) return "" 
+                    else return `￥${this.seller.minPrice}起送`
                 else return ''
             }
         },
