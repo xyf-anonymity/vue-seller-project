@@ -9,7 +9,7 @@ const {reqBefore,reqSuccess,reqFail} = hooks
 const myAxios = axios.create({
     timeout:config.timeout,
     //前端配置代理解决跨域问题时，baseURL 中的服务器主机名和端口不可加上
-    // baseURL:config.baseURL  //对所有请求Url统一配置代理解决跨域
+    baseURL:config.baseURL  //对所有请求Url统一配置代理解决跨域
 })
 
 // 添加请求拦截器
